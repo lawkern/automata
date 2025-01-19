@@ -18,7 +18,7 @@ PLATFORM_INITIALIZE(platform_initialize)
    terminal.pitch  = terminal.width * sizeof(char);
 }
 
-PLATFORM_PROCESS_INPUT(platform_process_input)
+PLATFORM_FRAME_BEGIN(platform_frame_begin)
 {
    bool keep_running = true;
    return(keep_running);

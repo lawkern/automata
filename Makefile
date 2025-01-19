@@ -6,7 +6,9 @@ compile:
 	$(CC) $(CFLAGS) -c ./src/platform_sdl3.c     -o ./build/sdl3.o
 	$(CC) $(CFLAGS) -c ./src/platform_terminal.c -o ./build/terminal.o
 
-	$(CC) $(CFLAGS) ./build/sdl3.o ./src/rule110.c -o ./build/rule110 $(LDFLAGS)
+	$(CC) $(CFLAGS) ./build/sdl3.o ./src/rule110.c   -o ./build/rule110   $(LDFLAGS)
+	$(CC) $(CFLAGS) ./build/sdl3.o ./src/wireworld.c -o ./build/wireworld $(LDFLAGS)
 
 run:
-	./build/rule110
+#	./build/rule110
+	./build/wireworld

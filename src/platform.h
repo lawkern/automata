@@ -10,8 +10,8 @@ typedef uint32_t u32;
 #define PLATFORM_INITIALIZE(name) void name(char *title, int grid_width, int grid_height)
 PLATFORM_INITIALIZE(platform_initialize);
 
-#define PLATFORM_PROCESS_INPUT(name) bool name(void)
-PLATFORM_PROCESS_INPUT(platform_process_input);
+#define PLATFORM_FRAME_BEGIN(name) bool name(void)
+PLATFORM_FRAME_BEGIN(platform_frame_begin);
 
 #define PLATFORM_RENDER(name) void name(u8 *grid, u32 *colors)
 PLATFORM_RENDER(platform_render);

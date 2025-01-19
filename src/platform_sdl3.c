@@ -69,7 +69,7 @@ void sdl3_toggle_fullscreen(SDL_Window *window)
    SDL_SetWindowFullscreen(sdl3.window, !already_fullscreen);
 }
 
-PLATFORM_PROCESS_INPUT(platform_process_input)
+PLATFORM_FRAME_BEGIN(platform_frame_begin)
 {
    bool keep_running = true;
 

@@ -44,7 +44,7 @@ int main(void)
 
    while(1)
    {
-      if(!platform_process_input())
+      if(!platform_frame_begin())
       {
          break;
       }
