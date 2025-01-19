@@ -1,10 +1,11 @@
 CA ?= langtons_ant
 
-CFLAGS  += $(shell pkg-config --cflags sdl3) -Wall -Werror -Wextra -Wpedantic
+CFLAGS  += $(shell pkg-config --cflags sdl3) -g -O2 -Wall -Werror -Wextra -Wpedantic
 LDFLAGS += $(shell pkg-config --libs sdl3)
 
 compile:
 	mkdir -p ./build
+
 	$(CC) $(CFLAGS) -c ./src/platform_sdl3.c     -o ./build/sdl3.o
 	$(CC) $(CFLAGS) -c ./src/platform_terminal.c -o ./build/terminal.o
 

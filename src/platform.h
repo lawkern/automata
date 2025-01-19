@@ -8,6 +8,9 @@ typedef uint32_t u32;
 
 #define lengthof(a) (sizeof(a) / sizeof((a)[0]))
 
+#define MIMIMUM(a, b) ((a) < (b) ? (a) : (b))
+#define MAXIMUM(a, b) ((a) > (b) ? (a) : (b))
+
 // NOTE: Perform any initialization required by the platform, e.g. creating a
 // window, allocating textures, etc.
 #define PLATFORM_INITIALIZE(name) void name(char *title, int grid_width, int grid_height)

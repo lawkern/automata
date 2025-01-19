@@ -2,9 +2,6 @@
 
 #include "platform.h"
 
-#define GRID_WIDTH 32
-#define GRID_HEIGHT 24
-
 typedef enum {
    E,
    H,
@@ -13,21 +10,29 @@ typedef enum {
    GRID_STATE_COUNT,
 } grid_state;
 
-static u32 colors[GRID_STATE_COUNT] = {0x000000FF, 0x0000FFFF, 0xFF0000FF, 0xFFFF00FF};
+static u32 colors[GRID_STATE_COUNT] = {
+   [E] = 0x000000FF,
+   [H] = 0x0000FFFF,
+   [T] = 0xFF0000FF,
+   [C] = 0xFFFF00FF,
+};
 
+#define GRID_WIDTH 16
+#define GRID_HEIGHT 14
 static u8 grid0[GRID_HEIGHT][GRID_WIDTH] = {
    {E},
-   {E, E, E, E, E, E, C, C, E, E, E, E, E, E, E},
-   {E, C, C, C, C, C, C, E, C, C, C, C, C, C, E},
-   {E, C, E, E, E, E, C, C, E, E, E, E, E, C, E},
-   {E, H, E, E, E, E, E, E, E, E, E, E, E, C, E},
-   {E, T, E, E, E, E, E, E, E, E, E, E, E, C, E},
-   {E, E, E, E, E, E, E, E, E, E, E, E, E, C, E},
-   {E, C, E, E, E, E, E, E, E, E, E, E, E, C, E},
-   {E, C, E, E, E, E, E, E, E, E, E, E, E, C, E},
-   {E, C, E, E, E, E, E, E, E, E, E, E, E, C, E},
-   {E, C, E, E, E, E, E, E, E, E, E, E, E, C, E},
-   {E, C, C, C, C, C, C, C, C, C, C, C, C, C, E},
+   {E, E, E, E, E, E, E, C, C, E, E, E, E, E, E, E},
+   {E, C, C, C, C, C, C, C, E, C, C, C, C, C, C, E},
+   {E, C, E, E, E, E, E, C, C, E, E, E, E, E, C, E},
+   {E, H, E, E, E, E, E, E, E, E, E, E, E, E, C, E},
+   {E, T, E, E, E, E, E, E, E, E, E, E, E, E, C, E},
+   {E, E, E, E, E, E, E, E, E, E, E, E, E, E, C, E},
+   {E, C, E, E, E, E, E, E, E, E, E, E, E, E, C, E},
+   {E, C, E, E, E, E, E, E, E, E, E, E, E, E, C, E},
+   {E, C, E, E, E, E, E, E, E, E, E, E, E, E, C, E},
+   {E, C, E, E, E, E, E, C, C, E, E, E, E, E, C, E},
+   {E, C, C, C, C, C, C, C, E, C, C, C, C, C, C, E},
+   {E, E, E, E, E, E, E, C, C, E, E, E, E, E, E, E},
    {E},
 };
 static u8 grid1[GRID_HEIGHT][GRID_WIDTH];
@@ -43,6 +48,7 @@ int main(void)
    {
       int this_grid_index = (running_grid_index + 0) % lengthof(grids);
       int next_grid_index = (running_grid_index + 1) % lengthof(grids);
+      running_grid_index++;
 
       platform_render(grids[this_grid_index], colors);
 
@@ -69,12 +75,12 @@ int main(void)
                case C: {
                   // conductor -> head iif 1 or 2 neighbors are heads
                   int neighbor_head_count =
-                     (this_grid_this_row[x - 1] == H) +
-                     (this_grid_this_row[x + 1] == H) +
-
                      (this_grid_prev_row[x - 1] == H) +
                      (this_grid_prev_row[x + 0] == H) +
                      (this_grid_prev_row[x + 1] == H) +
+
+                     (this_grid_this_row[x - 1] == H) +
+                     (this_grid_this_row[x + 1] == H) +
 
                      (this_grid_next_row[x - 1] == H) +
                      (this_grid_next_row[x + 0] == H) +
@@ -92,8 +98,6 @@ int main(void)
             }
          }
       }
-
-      running_grid_index++;
 
       platform_frame_end();
    }

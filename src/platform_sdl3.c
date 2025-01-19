@@ -31,8 +31,15 @@ PLATFORM_INITIALIZE(platform_initialize)
       exit(1);
    }
 
-   int window_width = grid_width * 4;
-   int window_height = grid_height * 4;
+   int max_window_width = 1280;
+   int max_window_height = 720;
+
+   int width_scale = max_window_width / grid_width;
+   int height_scale = max_window_height / grid_height;
+   int scale = MIMIMUM(width_scale, height_scale);
+
+   int window_width  = scale * grid_width;
+   int window_height = scale * grid_height;
 
    if(!SDL_CreateWindowAndRenderer(title, window_width, window_height, 0, &sdl3.window, &sdl3.renderer))
    {
