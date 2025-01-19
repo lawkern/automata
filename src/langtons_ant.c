@@ -47,13 +47,8 @@ int main(void)
 
    platform_initialize("Langton's Ant Cellular Automata", GRID_WIDTH, GRID_HEIGHT);
 
-   while(1)
+   while(platform_frame_begin())
    {
-      if(!platform_frame_begin())
-      {
-         break;
-      }
-
       platform_render((u8 *)grid, colors);
 
       grid[ant_y][ant_x] -= 2;

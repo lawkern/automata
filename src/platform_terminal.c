@@ -13,6 +13,9 @@ struct {
 
 PLATFORM_INITIALIZE(platform_initialize)
 {
+   puts(title);
+   puts("--");
+
    terminal.width  = grid_width;
    terminal.height = grid_height;
    terminal.pitch  = terminal.width * sizeof(char);
@@ -26,6 +29,8 @@ PLATFORM_FRAME_BEGIN(platform_frame_begin)
 
 PLATFORM_RENDER(platform_render)
 {
+   (void)colors;
+
    for(int y = 0; y < terminal.height; ++y)
    {
       u8 *row = grid + (terminal.pitch * y);

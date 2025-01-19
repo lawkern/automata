@@ -36,17 +36,11 @@ static u8 *grids[] = {(u8 *)grid0, (u8 *)grid1};
 
 int main(void)
 {
-   platform_initialize("Wireworld Cellular Automata", GRID_WIDTH, GRID_HEIGHT);
-
    int running_grid_index = 0;
 
-   while(1)
+   platform_initialize("Wireworld Cellular Automata", GRID_WIDTH, GRID_HEIGHT);
+   while(platform_frame_begin())
    {
-      if(!platform_frame_begin())
-      {
-         break;
-      }
-
       int this_grid_index = (running_grid_index + 0) % lengthof(grids);
       int next_grid_index = (running_grid_index + 1) % lengthof(grids);
 

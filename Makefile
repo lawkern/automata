@@ -1,5 +1,7 @@
-CFLAGS  += -g $(shell pkg-config --cflags sdl3)
-LDFLAGS +=    $(shell pkg-config --libs sdl3)
+CA ?= langtons_ant
+
+CFLAGS  += $(shell pkg-config --cflags sdl3) -Wall -Werror -Wextra -Wpedantic
+LDFLAGS += $(shell pkg-config --libs sdl3)
 
 compile:
 	mkdir -p ./build
@@ -11,6 +13,4 @@ compile:
 	$(CC) $(CFLAGS) ./build/sdl3.o ./src/langtons_ant.c -o ./build/langtons_ant $(LDFLAGS)
 
 run:
-#	./build/rule110
-#	./build/wireworld
-	./build/langtons_ant
+	./build/$(CA)

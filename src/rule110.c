@@ -35,20 +35,14 @@ int main(void)
    u8 pattern_values[] = {0, 1, 1, 1, 0, 1, 1, 0};
 
    int row_index = 0;
-   for(int index = 0; index < GRID_WIDTH; ++index)
+   for(int index = 0; index < (int)GRID_WIDTH; ++index)
    {
       grid[row_index][index] = initial_row[index];
    }
 
    platform_initialize("Rule 110 Cellular Automata", GRID_WIDTH, GRID_HEIGHT);
-
-   while(1)
+   while(platform_frame_begin())
    {
-      if(!platform_frame_begin())
-      {
-         break;
-      }
-
       platform_render((u8 *)grid, colors);
 
       int this_row_index = (row_index + 0) % lengthof(grid);
@@ -57,7 +51,7 @@ int main(void)
       u8 *this_row = grid[this_row_index];
       u8 *next_row = grid[next_row_index];
 
-      for(int index = 1; index < (GRID_WIDTH - 1); ++index)
+      for(int index = 1; index < (int)(GRID_WIDTH - 1); ++index)
       {
          u8 a = this_row[index - 1];
          u8 b = this_row[index + 0];
