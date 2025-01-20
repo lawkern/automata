@@ -5,48 +5,41 @@
 // NOTE: Pattern referenced from description at
 // https://en.wikipedia.org/wiki/Rule_110
 
-static u8 initial_row[] = {
-   0, // NOTE: Boundary zero for neighbor computations.
-
-   0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
-   0, 0, 0, 1, 1, 1, 0, 1, 1, 1,
-   0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
-
-   0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
-   1, 0, 0, 1, 1, 1, 1,
-   0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
-
-   0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
-   1, 1, 1,
-   0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
-
-   0, // NOTE: Boundary zero for neighbor computations.
-};
-
+static u8 pattern_values[] = {0, 1, 1, 1, 0, 1, 1, 0};
 static u32 colors[] = {0x000000FF, 0xFFFFFFFF};
 
-#define GRID_WIDTH (lengthof(initial_row))
-#define GRID_HEIGHT (GRID_WIDTH * 2)
+#define GRID_WIDTH 106
+#define GRID_HEIGHT 212
 
-static u8 grid[GRID_HEIGHT][GRID_WIDTH];
+static u8 grid[GRID_HEIGHT][GRID_WIDTH] = {{
+      0, // NOTE: Boundary zero for neighbor computations.
+
+      0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
+      0, 0, 0, 1, 1, 1, 0, 1, 1, 1,
+      0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
+
+      0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
+      1, 0, 0, 1, 1, 1, 1,
+      0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
+
+      0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
+      1, 1, 1,
+      0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1,
+
+      0, // NOTE: Boundary zero for neighbor computations.
+   }};
 
 int main(void)
 {
-   u8 pattern_values[] = {0, 1, 1, 1, 0, 1, 1, 0};
-
    int row_index = 0;
-   for(int index = 0; index < (int)GRID_WIDTH; ++index)
-   {
-      grid[row_index][index] = initial_row[index];
-   }
 
    platform_initialize("Rule 110 Cellular Automata", GRID_WIDTH, GRID_HEIGHT);
    while(platform_frame_begin())
    {
       platform_render((u8 *)grid, colors);
 
-      int this_row_index = (row_index + 0) % lengthof(grid);
-      int next_row_index = (row_index + 1) % lengthof(grid);
+      int this_row_index = (row_index + 0) % GRID_HEIGHT;
+      int next_row_index = (row_index + 1) % GRID_HEIGHT;
 
       u8 *this_row = grid[this_row_index];
       u8 *next_row = grid[next_row_index];
