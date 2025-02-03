@@ -2,8 +2,11 @@ CFLAGS  += $(shell pkg-config --cflags sdl3) -g -O2 -Wall -Werror -Wextra -Wpeda
 LDFLAGS += $(shell pkg-config --libs sdl3)
 
 asm-x64: platform
-	nasm -g -felf64 ./src/rule110.asm -o ./build/rule110.o
-	$(CC) -no-pie -m64 ./build/sdl3.o ./build/rule110.o -o ./build/rule110 $(LDFLAGS)
+	nasm -g -felf64 ./src/rule110.asm   -o ./build/rule110.o
+	nasm -g -felf64 ./src/wireworld.asm -o ./build/wireworld.o
+
+	$(CC) -no-pie -m64 ./build/sdl3.o ./build/rule110.o   -o ./build/rule110   $(LDFLAGS)
+	$(CC) -no-pie -m64 ./build/sdl3.o ./build/wireworld.o -o ./build/wireworld $(LDFLAGS)
 
 asm-arm64: platform
 	$(CC) $(CFLAGS) ./build/sdl3.o ./src/rule110.s      -o ./build/rule110      $(LDFLAGS)

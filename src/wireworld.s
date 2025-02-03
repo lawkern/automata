@@ -45,9 +45,6 @@ main:
 title:
     .asciz "Wireworld Cellular Automata"
 
-pattern_values:
-    .byte 0, 1, 1, 1, 0, 1, 1, 0
-
 colors:
     .4byte 0x000000FF, 0x0000FFFF, 0xFF0000FF, 0xFFFF00FF
 
